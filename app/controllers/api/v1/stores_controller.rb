@@ -5,7 +5,7 @@ class Api::V1::StoresController < ApplicationController
     unless @stores.nil?
       render json: @stores, each_serializer: StoreSerializer
     else
-      render json: { errors: ['invalid publisher_id'] }, status: 404
+      render json: { errors: ['publisher not found'] }, status: 400
     end
   end
 

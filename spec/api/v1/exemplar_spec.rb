@@ -15,6 +15,13 @@ describe 'Exemplar API' do
         do_request(ids: ids)
       end
 
+      it 'changes exemplars status' do
+        exemplars.each do |e|
+          e.reload
+          expect(e.status).to eq 'sold'
+        end
+      end
+
       it 'returns 200 status' do
         expect(response).to be_success
       end

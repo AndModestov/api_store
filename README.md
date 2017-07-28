@@ -1,7 +1,8 @@
 ## API_STORE
 
-#### STORES  
+### STORES  
 **PATH:** GET /api/v1/stores
+
 **PARAMS:**
 
 ```
@@ -31,8 +32,9 @@
 
 
 
-#### EXEMPLARS
+### EXEMPLARS
 **PATH:** PATCH /api/v1/exemplars/sell
+
 **PARAMS:**
 
 ```

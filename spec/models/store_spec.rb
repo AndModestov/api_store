@@ -24,9 +24,14 @@ RSpec.describe Store, type: :model do
 
     context 'filter by publisher' do
       context 'with valid publisher id' do
+        after { Store.filter_by 'publisher', { publisher_id: publisher.id } }
+
+        it 'should call right filter method' do
+          expect(Store).to receive(:filter_by_publisher).with({ publisher_id: publisher.id })
+        end
+
         it 'should call the right scope' do
           expect(Store).to receive(:with_books_in_stock).with(publisher.books.ids)
-          Store.filter_by 'publisher', { publisher_id: publisher.id }
         end
       end
 
@@ -45,5 +50,5 @@ RSpec.describe Store, type: :model do
       end
     end
   end
-  
+
 end

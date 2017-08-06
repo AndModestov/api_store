@@ -11,19 +11,17 @@ class Store < ApplicationRecord
   end
 
   def self.filter_by type, params={}
-    case type
-    when 'publisher'
-      filter_by_publisher params[:publisher_id]
-    else
-      nil
-    end
+    send("filter_by_#{type}", params)
+  rescue NoMethodError => e
+    puts "Error: #{e.message}. Backtrace: #{e.backtrace}"
+    nil
   end
 
 
   private
 
-  def self.filter_by_publisher publisher_id
-    publisher = Publisher.find_by(id: publisher_id)
+  def self.filter_by_publisher params
+    publisher = Publisher.find_by(id: params[:publisher_id])
     publisher.present? ? Store.with_books_in_stock(publisher.books.ids) : nil
   end
 end

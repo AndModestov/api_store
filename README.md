@@ -7,9 +7,14 @@
 
 ```
 {  
-    publisher_id: <publisher_id>,  
+    filter_type: <filter_type>
+    filter_params: { ... }
 }  
 ```
+
+#### filter types:
+  - 'publisher', filter_params: { publisher_id: <publisher_id>}
+
 
 **RESPONSE:**  
 

@@ -35,7 +35,7 @@ describe 'Store API' do
 
     context 'with filter params' do
       before do
-        do_request(publisher_id: publisher.id)
+        do_request(filter_type: 'publisher', filter_params: { publisher_id: publisher.id })
       end
 
       it 'returns 200 status' do
@@ -56,10 +56,10 @@ describe 'Store API' do
 
     context 'with invalid filter params' do
       before do
-        do_request(publisher_id: 100)
+        do_request(filter_type: 'publisher', filter_params: { publisher_id: 100 })
       end
 
-      it 'returns 404 status' do
+      it 'returns 400 status' do
         expect(response).to_not be_success
       end
     end

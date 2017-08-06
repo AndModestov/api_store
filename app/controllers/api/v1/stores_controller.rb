@@ -1,11 +1,12 @@
 class Api::V1::StoresController < ApplicationController
-  before_action :set_stores, only: :index
 
   def index
-    unless @stores.nil?
-      render json: @stores, each_serializer: StoreSerializer
+    stores = set_stores
+    
+    unless stores.nil?
+      render json: stores, each_serializer: StoreSerializer
     else
-      render json: { errors: ['publisher not found'] }, status: 400
+      render json: { errors: ['filter error'] }, status: 400
     end
   end
 
@@ -13,12 +14,10 @@ class Api::V1::StoresController < ApplicationController
   private
 
   def set_stores
-    @stores =
-      if params[:publisher_id].present?
-        publisher = Publisher.find_by(id: params[:publisher_id])
-        publisher.present? ? Store.with_books_in_stock(publisher.books.ids) : nil
-      else
-        Store.all
-      end
+    if params[:filter_type].present? && params[:filter_params].present?
+      Store.filter_by(params[:filter_type], params[:filter_params])
+    else
+      Store.all
+    end
   end
 end

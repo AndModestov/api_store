@@ -7,7 +7,7 @@
 
 ```
 {  
-    filter_type: <filter_type>
+    filter_type: <filter_type>,
     filter_params: { ... }
 }  
 ```
@@ -47,7 +47,7 @@
     ids: [<exemplar_ids>],
     exemplar: {
       status: <exemplar_status>,
-      store_id: <store_id> 
+      store_id: <store_id>
     }
 }  
 ```
